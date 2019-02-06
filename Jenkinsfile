@@ -20,11 +20,7 @@ pipeline {
         stage('Unarchive') {
           steps {
             sh 'tar -xzf RosBE.tar.gz'
-            sh 'touch donearchiving'
-            waitUntil() {
-              fileExists 'donearchiving'
-            }
-
+            sleep(time: 1, unit: 'MINUTES')
           }
         }
         stage('Unarchiving message') {
