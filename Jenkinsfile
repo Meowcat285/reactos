@@ -4,7 +4,7 @@ pipeline {
     stage('Download Environment') {
       steps {
         sh 'wget https://svn.reactos.org/amine/RosBEBinFull.tar.gz -O RosBE.tar.gz tar -xzf RosBE.tar.gz'
-        sh 'tar -xzf RosBE.tar.gz'
+        sh '&& tar -xzf RosBE.tar.gz'
       }
     }
     stage('Configure and build') {
