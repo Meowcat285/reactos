@@ -8,7 +8,7 @@ pipeline {
             sh 'wget https://svn.reactos.org/amine/RosBEBinFull.tar.gz -O RosBE.tar.gz'
           }
         }
-        stage('error') {
+        stage('Downloading Message') {
           steps {
             echo 'Downloading...'
           }
@@ -20,13 +20,14 @@ pipeline {
         stage('Unarchive') {
           steps {
             sh 'tar -xzf RosBE.tar.gz'
+            sh 'touch donearchiving'
             waitUntil() {
-              fileExists 'RosBE'
+              fileExists 'donearchiving'
             }
 
           }
         }
-        stage('error') {
+        stage('Unarchiving message') {
           steps {
             echo 'Unarchiving'
           }
@@ -40,7 +41,7 @@ pipeline {
             sh 'echo \'mkdir ../Build && cd ../Build && $WORKSPACE/configure.sh -DENABLE_ROSTESTS=1 && cd reactos && ninja -k 0 && ninja bootcd\' > tmp_file'
           }
         }
-        stage('error') {
+        stage('Building message') {
           steps {
             echo 'Building and praying...'
           }
